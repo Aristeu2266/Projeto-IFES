@@ -1,0 +1,7 @@
+{
+"Ambos juntos" : true,
+"Arquivo negativo" : true,
+"Linhas do arquivo negativo" : 100,
+"Arquivo positivo" : true,
+"Linhas do arquivo positivo" : 100
+}

@@ -1,4 +1,5 @@
 from tkinter import Tk
+from tkinter import Frame
 from tkinter import Label
 from tkinter import Entry
 from tkinter import Button
@@ -21,21 +22,23 @@ class Janela:
         self.frase = None  # Receberá a frase a ser classificada pelo classificador
 
         self.root = Tk()
+        self.frame = Frame(self.root, padx=30, pady=10)
+        self.frame.pack()
 
         # Instancia os widgets que serão utilizados
-        self.label_0 = Label(self.root, text="")  # Label responsável por avisos
-        self.label_1 = Label(self.root, text="Arquivo de treinamento:")
-        self.entry_1 = Entry(self.root)
-        self.label_2 = Label(self.root, text="Arquivo de teste:")
-        self.entry_2 = Entry(self.root)
-        self.button_1 = Button(self.root, text="Criar classificador", command=lambda: self.cria_classificador())
-        self.button_2 = Button(self.root, text="Testar classificador", command=lambda: self.mostra_precisao())
-        self.label_3 = Label(self.root, text="Inserir texto:")
-        self.entry_3 = Entry(self.root)
-        self.button_3 = Button(self.root, text="Classificar", command=lambda: self.classifica())
-        self.button_4 = Button(self.root, text="Criar Relatório", command=lambda: self.cria_relatorio())
-        self.button_5 = Button(self.root, text='Carrega Classificador', command=lambda: self.carrega_classificador())
-        self.button_6 = Button(self.root, text='Carrega Teste', command=lambda: self.carrega_teste())
+        self.label_0 = Label(self.frame, text="")  # Label responsável por avisos
+        self.label_1 = Label(self.frame, text="Arquivo de treinamento:")
+        self.entry_1 = Entry(self.frame)
+        self.label_2 = Label(self.frame, text="Arquivo de teste:")
+        self.entry_2 = Entry(self.frame)
+        self.button_1 = Button(self.frame, text="Criar classificador", command=lambda: self.cria_classificador())
+        self.button_2 = Button(self.frame, text="Testar classificador", command=lambda: self.mostra_precisao())
+        self.label_3 = Label(self.frame, text="Inserir texto:")
+        self.entry_3 = Entry(self.frame)
+        self.button_3 = Button(self.frame, text="Classificar", command=lambda: self.classifica())
+        self.button_4 = Button(self.frame, text="Criar Relatório", command=lambda: self.cria_relatorio())
+        self.button_5 = Button(self.frame, text='Carrega Classificador', command=lambda: self.carrega_classificador())
+        self.button_6 = Button(self.frame, text='Carrega Teste', command=lambda: self.carrega_teste())
 
         # Posiciona os widgets iniciais
         self.label_0.pack()
@@ -43,9 +46,9 @@ class Janela:
         self.entry_1.pack()
         self.label_2.pack()
         self.entry_2.pack()
-        self.button_1.pack()
-        self.button_5.pack()
-        self.button_6.pack()
+        self.button_1.pack(pady=2)
+        self.button_5.pack(pady=2)
+        self.button_6.pack(pady=2)
 
         self.root.mainloop()
 
@@ -72,7 +75,7 @@ class Janela:
 
             self.label_3.pack()
             self.entry_3.pack()
-            self.button_3.pack()
+            self.button_3.pack(pady=2)
                 
                 
         except FileNotFoundError:  # Caso o arquivo não exista a validação vai dar FileNotFoundError
@@ -102,8 +105,8 @@ class Janela:
             self.button_4.pack_forget()
             self.dados_teste = BuscaInformacoes(self.arq_teste) 
 
-            self.button_2.pack()
-            self.button_4.pack()
+            self.button_2.pack(pady=2)
+            self.button_4.pack(pady=2)
         except FileNotFoundError:  # Caso o arquivo não exista a validação vai dar FileNotFoundError.
             self.label_0["text"] = "Arquivo de teste não encontrado"
             self.button_2.pack_forget()
@@ -149,23 +152,23 @@ class Janela:
 
             self.label_3.pack()
             self.entry_3.pack()
-            self.button_3.pack()
+            self.button_3.pack(pady=2)
 
             self.label_0["text"] = 'Classificador carregado'
 
             if self.arq_teste:
                 self.dados_teste = BuscaInformacoes(self.arq_teste)
-                self.button_4.pack()
+                self.button_4.pack(pady=2)
         except FileNotFoundError:
             self.label_0["text"] = "Não há classificador salvo"
     
     def carrega_teste(self):
         self.valida_arq_teste()
         if self.arq_teste:
-            self.button_2.pack()
+            self.button_2.pack(pady=2)
             self.label_3.pack()
             self.entry_3.pack()
-            self.button_3.pack()
+            self.button_3.pack(pady=2)
     
     class Classificador():
         def __init__(self, classificador, palavrasUnicas):
